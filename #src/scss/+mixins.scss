@@ -1,0 +1,21 @@
+@mixin font-face($name, $fail, $weight, $style) {
+    @font-face {
+        font-family: $name;
+        font-display: swap;
+        src: url("../../dist/fonts/#{$fail}.woff") format("woff"),
+            url("../../dist/fonts/#{$fail}.woff2") format("woff2");
+        font-weight: $weight;
+        font-style: $style;
+        font-display: block;
+    }
+}
+
+
+@mixin adaptive-value($value, $pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $addMobSize: $addSize + $addSize * 0.7;
+    #{$value}: #{$pcSize + px};
+    @media (max-width: #{$md1 + px}) {
+        #{$value}: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) /980));
+    }
+}
